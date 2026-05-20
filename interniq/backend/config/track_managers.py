@@ -1,0 +1,15 @@
+TRACK_MANAGERS = {
+    "IT Support & Helpdesk": "it.manager@example.com",
+    "Business Management System (BMS)": "bms.manager@example.com",
+    "Security Management Automation": "security.manager@example.com",
+    "SPS Web Development": "webdev.manager@example.com",
+    "Endpoint Protection": "endpoint.manager@example.com",
+    "Helpdesk": "helpdesk.manager@example.com",
+    "Frontend development": "frontend.manager@example.com",
+    "Backend Development using NodeJS": "backend.manager@example.com",
+    "Appian Developer": "appian.manager@example.com",
+    "IAM Developer": "iam.manager@example.com",
+    "Guardium Data Security": "guardium.manager@example.com",
+    "Document Classifier": "ai.manager@example.com",
+    "Auto-Generate RFP Proposal": "rfp.manager@example.com",
+}

@@ -1,0 +1,91 @@
+[
+  {
+    "first_name": "Muhammad ",
+    "last_name": "Osama",
+    "email": "osamaktk643@gmail.com",
+    "phone": "+923356685075",
+    "location": "PK",
+    "city": "Karak",
+    "university": "Kohat University of Science and Technology",
+    "degree": "Bachelor's",
+    "major": "SOFTWARE Engineering",
+    "cgpa": "2.5",
+    "semester": "8",
+    "class_ranking": "9",
+    "field": "Engineering",
+    "selected_tracks": [
+      "IT Support & Helpdesk",
+      "Backend Development using NodeJS",
+      "Auto-Generate RFP Proposal"
+    ],
+    "resume_url": "http://localhost:8000/local-files/interniq-docs/9ac04689-ab32-4583-a90c-8b4fd291dade_MUHAMMAD_OSAMA_CV_updated_.pdf__1_.pdf",
+    "transcript_url": "http://localhost:8000/local-files/interniq-docs/c2d6a455-2e51-4afa-b91d-112ff8c1fb8e_Bachelor_Transcript_Org_.pdf",
+    "photo_url": "http://localhost:8000/local-files/interniq-docs/0f801ff6-6d7e-4dfe-8ea0-a53eb842bb6f_output-image.png",
+    "video_link": "",
+    "status": "manual_review",
+    "id": "1854c440-2bc5-44e6-bfd3-2258022add6b",
+    "created_at": "2026-05-19T12:42:23.694050+00:00"
+  },
+  {
+    "first_name": "Muhammad ",
+    "last_name": "Osama",
+    "email": "osamaktk643@gmail.com",
+    "phone": "+923356685075",
+    "location": "PK",
+    "city": "Karak",
+    "university": "Kohat University of Science and Technology",
+    "degree": "Bachelor's",
+    "major": "SOFTWARE Engineering",
+    "cgpa": "2.5",
+    "semester": "8",
+    "class_ranking": "9",
+    "field": "Engineering",
+    "selected_tracks": [
+      "IT Support & Helpdesk",
+      "Backend Development using NodeJS",
+      "Auto-Generate RFP Proposal"
+    ],
+    "resume_url": "http://localhost:8000/local-files/interniq-docs/3ccdb1cc-8626-4838-8202-ed9a9bcd8f33_MUHAMMAD_OSAMA_CV_updated_.pdf__1_.pdf",
+    "transcript_url": "http://localhost:8000/local-files/interniq-docs/21762b6b-de63-4615-9c55-02ea81b649cc_Bachelor_Transcript_Org_.pdf",
+    "photo_url": "http://localhost:8000/local-files/interniq-docs/559dbb5a-0eb8-4100-a729-6e27c56e3514_output-image.png",
+    "video_link": "",
+    "status": "manual_review",
+    "ai_resume_verdict": {
+      "valid": true,
+      "reason": "Document contains all standard resume sections with professional formatting",
+      "confidence": "high",
+      "evidence": [
+        "MUHAMMAD OSAMA",
+        "+92-3356685075",
+        "osamaktk648@gmail.com",
+        "WORK EXPERIENCE",
+        "AI Junior Engineer miniByte.ai",
+        "TECH SKILLS",
+        "Python, JavaScript",
+        "CERTIFICATIONS",
+        "NAVTTC Artificial Intelligence Certification",
+        "EDUCATION",
+        "Bachelor In SOFTWARE ENGINEERING"
+      ],
+      "needs_manual_review": false
+    },
+    "ai_transcript_verdict": {
+      "valid": true,
+      "reason": "Document appears to be image-based or scanned. Auto-verification will continue via manual review.",
+      "confidence": "low",
+      "evidence": [
+        "Very little extractable text found in PDF.",
+        "Filename matches expected type (transcript)."
+      ],
+      "needs_manual_review": true
+    },
+    "ai_summary": {
+      "manual_review_required": true,
+      "manual_review_reasons": [
+        "Transcript requires manual review."
+      ]
+    },
+    "id": "aef7604e-51a2-47af-aaf8-c24ae0a9e010",
+    "created_at": "2026-05-19T12:52:35.325065+00:00"
+  }
+]
