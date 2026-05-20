@@ -3,5 +3,4 @@ fastapi
 pdfplumber
 python-dotenv
 python-multipart
-supabase
 uvicorn

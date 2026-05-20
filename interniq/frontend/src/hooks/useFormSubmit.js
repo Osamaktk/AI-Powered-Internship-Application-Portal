@@ -24,7 +24,7 @@ export default function useFormSubmit() {
       payload.append(key, value ?? "");
     });
 
-    payload.append("resume", files.resume);
+    payload.append("cv", files.cv);
     payload.append("transcript", files.transcript);
     if (files.photo) {
       payload.append("photo", files.photo);

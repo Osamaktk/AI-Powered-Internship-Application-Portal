@@ -122,7 +122,7 @@ def send_track_notification(
             degree=applicant.get("degree", ""),
             major=applicant.get("major", ""),
             cgpa=applicant.get("cgpa", ""),
-            semester=applicant.get("semester", ""),
+            semester=applicant.get("current_semester", "") or applicant.get("semester", ""),
             status_label=status_label,
             status_note=status_note,
             assigned_manager_email=manager_email,

@@ -1,5 +1,7 @@
-export default function SubmitSection({ loading, result, error }) {
+export default function SubmitSection({ loading, result, error, canSubmit }) {
   const showReceived = ["received", "accepted"].includes(result?.status);
+  const showRejected = result?.status === "rejected";
+  const isDisabled = !canSubmit;
 
   return (
     <section className="panel">
@@ -11,8 +13,13 @@ export default function SubmitSection({ loading, result, error }) {
       <div className="mt-5">
         <button
           type="submit"
-          disabled={loading}
-          className="w-full rounded-xl bg-brand-ink px-4 py-3 font-display text-lg font-bold text-white transition hover:bg-slate-900 disabled:cursor-not-allowed disabled:opacity-70"
+          disabled={isDisabled}
+          title={isDisabled ? "Please upload and verify both documents to continue" : ""}
+          className={`w-full rounded-xl px-4 py-3 font-display text-lg font-bold text-white transition ${
+            isDisabled
+              ? "cursor-not-allowed bg-slate-500 opacity-50"
+              : "bg-brand-ink hover:bg-slate-900"
+          }`}
         >
           {loading ? "Submitting..." : "APPLY"}
         </button>
@@ -30,6 +37,13 @@ export default function SubmitSection({ loading, result, error }) {
           <p className="mt-1">
             {result?.message || "Your application has been received and we will be in touch very soon."}
           </p>
+        </div>
+      )}
+
+      {showRejected && (
+        <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          <p className="font-semibold">Application rejected.</p>
+          <p className="mt-1">{result?.reason || "Document verification failed."}</p>
         </div>
       )}
     </section>

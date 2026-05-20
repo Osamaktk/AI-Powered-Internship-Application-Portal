@@ -192,10 +192,9 @@ def _short_text_result(source_name: str, expected_type: str) -> dict[str, Any]:
         return {
             "valid": True,
             "reason": (
-                "Document appears to be image-based or scanned. "
-                "Auto-verification will continue via manual review."
+                "Document appears to be image-based or scanned and matches the expected file pattern."
             ),
-            "confidence": "low",
+            "confidence": "medium",
             "evidence": [
                 "Very little extractable text found in PDF.",
                 f"Filename matches expected type ({expected_type}).",

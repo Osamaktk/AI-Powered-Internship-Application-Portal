@@ -5,7 +5,6 @@ import DocumentUploadSection from "./components/DocumentUploadSection";
 import SubmitSection from "./components/SubmitSection";
 import useFormSubmit from "./hooks/useFormSubmit";
 
-const MAX_PDF_SIZE = 5 * 1024 * 1024;
 const MAX_PHOTO_SIZE = 2 * 1024 * 1024;
 
 const initialFields = {
@@ -30,18 +29,28 @@ const initialFields = {
 };
 
 const initialFiles = {
-  resume: null,
+  cv: null,
   transcript: null,
   photo: null,
+};
+
+const initialVerificationState = {
+  cvSlot: { status: "idle", filename: "", reason: "", evidence: [] },
+  transcriptSlot: { status: "idle", filename: "", reason: "", evidence: [] },
 };
 
 export default function App() {
   const [fields, setFields] = useState(initialFields);
   const [files, setFiles] = useState(initialFiles);
+  const [verificationState, setVerificationState] = useState(initialVerificationState);
   const [localError, setLocalError] = useState("");
   const { loading, result, error, submit, clearFeedback } = useFormSubmit();
 
   const selectedTracks = fields.selected_tracks;
+  const canSubmit =
+    verificationState.cvSlot.status === "verified" &&
+    verificationState.transcriptSlot.status === "verified" &&
+    !loading;
 
   const combinedError = useMemo(() => localError || error, [error, localError]);
 
@@ -72,37 +81,45 @@ export default function App() {
     });
   };
 
-  const setFile = (fileKey, file) => {
+  const setPhoto = (file) => {
     clearFeedback();
     setLocalError("");
+
     if (!file) {
-      setFiles((previous) => ({ ...previous, [fileKey]: null }));
+      setFiles((previous) => ({ ...previous, photo: null }));
       return;
     }
 
-    const isPdfKey = fileKey === "resume" || fileKey === "transcript";
-    if (isPdfKey) {
-      if (!file.name.toLowerCase().endsWith(".pdf")) {
-        setLocalError(`${fileKey === "resume" ? "Resume" : "Transcript"} must be a PDF.`);
-        return;
-      }
-      if (file.size > MAX_PDF_SIZE) {
-        setLocalError(`${fileKey === "resume" ? "Resume" : "Transcript"} exceeds 5MB.`);
-        return;
-      }
-    } else if (fileKey === "photo") {
-      const allowed = [".jpg", ".jpeg", ".png", ".gif"];
-      const lower = file.name.toLowerCase();
-      if (!allowed.some((ext) => lower.endsWith(ext))) {
-        setLocalError("Photo must be JPG, JPEG, PNG, or GIF.");
-        return;
-      }
-      if (file.size > MAX_PHOTO_SIZE) {
-        setLocalError("Photo exceeds 2MB.");
-        return;
-      }
+    const allowed = [".jpg", ".jpeg", ".png", ".gif"];
+    const lower = file.name.toLowerCase();
+    if (!allowed.some((ext) => lower.endsWith(ext))) {
+      setLocalError("Photo must be JPG, JPEG, PNG, or GIF.");
+      return;
+    }
+    if (file.size > MAX_PHOTO_SIZE) {
+      setLocalError("Photo exceeds 2MB.");
+      return;
     }
 
+    setFiles((previous) => ({ ...previous, photo: file }));
+  };
+
+  const onSlotStateChange = (slotKey, nextState) => {
+    clearFeedback();
+    setLocalError("");
+    setVerificationState((previous) => ({
+      ...previous,
+      [slotKey]: {
+        ...previous[slotKey],
+        ...nextState,
+      },
+    }));
+  };
+
+  const onVerifiedFileChange = (slotKey, file) => {
+    clearFeedback();
+    setLocalError("");
+    const fileKey = slotKey === "cvSlot" ? "cv" : "transcript";
     setFiles((previous) => ({ ...previous, [fileKey]: file }));
   };
 
@@ -111,16 +128,16 @@ export default function App() {
     setLocalError("");
     clearFeedback();
 
+    if (!canSubmit) {
+      setLocalError("Please upload and verify both documents to continue.");
+      return;
+    }
     if (selectedTracks.length < 1) {
       setLocalError("Please select at least one track.");
       return;
     }
     if (selectedTracks.length > 3) {
       setLocalError("You can select up to 3 tracks only.");
-      return;
-    }
-    if (!files.resume || !files.transcript) {
-      setLocalError("Resume and transcript files are required.");
       return;
     }
 
@@ -140,6 +157,7 @@ export default function App() {
       ...fields,
       university: universityValue,
       class_ranking: classRankingValue,
+      current_semester: fields.semester,
       selected_tracks: selectedTracks,
     };
 
@@ -166,14 +184,17 @@ export default function App() {
         </div>
         <div className="animate-fade-slide [animation-delay:220ms]">
           <DocumentUploadSection
-            fields={fields}
-            files={files}
-            onFieldChange={setField}
-            onFileChange={setFile}
+            videoLink={fields.video_link}
+            onVideoLinkChange={(value) => setField("video_link", value)}
+            photoFile={files.photo}
+            onPhotoChange={setPhoto}
+            verificationState={verificationState}
+            onSlotStateChange={onSlotStateChange}
+            onVerifiedFileChange={onVerifiedFileChange}
           />
         </div>
         <div className="animate-fade-slide [animation-delay:320ms]">
-          <SubmitSection loading={loading} result={result} error={combinedError} />
+          <SubmitSection loading={loading} result={result} error={combinedError} canSubmit={canSubmit} />
         </div>
       </form>
     </main>
