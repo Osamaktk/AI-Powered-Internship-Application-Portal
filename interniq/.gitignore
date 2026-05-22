@@ -3,7 +3,7 @@ backend/.env
 backend/__pycache__/
 backend/**/*.pyc
 backend/uploads/
-backend/database/interniq.db
+backend/database/*.db
 backend/local_storage/
 frontend/node_modules/
 frontend/dist/

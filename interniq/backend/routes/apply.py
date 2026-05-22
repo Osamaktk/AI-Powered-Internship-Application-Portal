@@ -124,9 +124,22 @@ async def submit_application(
 ):
     tracks = _parse_selected_tracks(selected_tracks)
     if not tracks:
-        raise HTTPException(status_code=400, detail="Please select at least one track.")
-    if len(tracks) > 3:
-        raise HTTPException(status_code=400, detail="You can select up to 3 tracks only.")
+        raise HTTPException(
+            status_code=400,
+            detail="Please select one internship program.",
+        )
+    if len(tracks) != 1:
+        raise HTTPException(
+            status_code=400,
+            detail="Only one internship program can be selected.",
+        )
+    selected_program = tracks[0]
+    manager_email = TRACK_MANAGERS.get(selected_program)
+    if not manager_email:
+        raise HTTPException(
+            status_code=400,
+            detail="Selected internship program is not configured for manager notification.",
+        )
 
     cv_bytes = await cv.read()
     transcript_bytes = await transcript.read()
@@ -255,15 +268,12 @@ async def submit_application(
     insert_application(application_row)
     saved_cv_absolute_path = str((BACKEND_ROOT / cv_saved_path).resolve())
 
-    for track_name in tracks:
-        manager_email = TRACK_MANAGERS.get(track_name)
-        if manager_email:
-            send_track_notification(
-                manager_email=manager_email,
-                track_name=track_name,
-                applicant=application_row,
-                cv_filepath=saved_cv_absolute_path,
-            )
+    send_track_notification(
+        manager_email=manager_email,
+        track_name=selected_program,
+        applicant=application_row,
+        cv_filepath=saved_cv_absolute_path,
+    )
     send_confirmation_to_applicant(applicant=application_row)
 
     return {

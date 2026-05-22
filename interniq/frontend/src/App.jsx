@@ -65,19 +65,9 @@ export default function App() {
     clearFeedback();
     setLocalError("");
     setFields((previous) => {
-      const alreadySelected = previous.selected_tracks.includes(trackName);
-      if (alreadySelected) {
-        return {
-          ...previous,
-          selected_tracks: previous.selected_tracks.filter((track) => track !== trackName),
-        };
-      }
-      if (previous.selected_tracks.length >= 3) {
-        return previous;
-      }
       return {
         ...previous,
-        selected_tracks: [...previous.selected_tracks, trackName],
+        selected_tracks: [trackName],
       };
     });
   };
@@ -134,11 +124,11 @@ export default function App() {
       return;
     }
     if (selectedTracks.length < 1) {
-      setLocalError("Please select at least one track.");
+      setLocalError("Please select one internship program.");
       return;
     }
-    if (selectedTracks.length > 3) {
-      setLocalError("You can select up to 3 tracks only.");
+    if (selectedTracks.length > 1) {
+      setLocalError("Please select only one internship program.");
       return;
     }
 
@@ -176,7 +166,7 @@ export default function App() {
         </h1>
         <p className="mt-2 max-w-3xl text-sm text-slate-100 sm:text-base">
           Start your professional journey by joining the SPS Internship Program. Submit your
-          profile, choose your preferred tracks, and upload your documents for AI-based screening.
+          profile, choose your internship program, and upload your documents for AI-based screening.
         </p>
         <a
           href="https://www.spsnet.com/spinnlabs_practice/internship-to-job-program/howitworks.php"
