@@ -16,7 +16,7 @@ function Label({ children }) {
 export default function PersonalInfoSection({ fields, onFieldChange }) {
   return (
     <section className="panel">
-      <h2 className="font-display text-2xl font-bold text-brand-ink">Section 1 — Personal Information</h2>
+      <h2 className="font-display text-2xl font-bold text-brand-ink">Section 1 - Personal Information</h2>
       <p className="mt-1 text-sm text-slate-600">
         Fill in your profile details exactly as they appear in your academic records.
       </p>
@@ -243,3 +243,4 @@ export default function PersonalInfoSection({ fields, onFieldChange }) {
     </section>
   );
 }
+

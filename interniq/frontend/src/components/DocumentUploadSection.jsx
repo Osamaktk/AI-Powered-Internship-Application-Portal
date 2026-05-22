@@ -15,7 +15,7 @@ function StatusStrip({ slot }) {
     return (
       <div className="mt-3 flex items-center gap-2 rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-700">
         <Spinner />
-        <span>Analyzing document with AI…</span>
+        <span>Analyzing document with AI...</span>
       </div>
     );
   }
@@ -23,7 +23,7 @@ function StatusStrip({ slot }) {
   if (status === "verified") {
     return (
       <div className="mt-3 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
-        ✅ {slot.filename} — Verified
+        [Verified] {slot.filename} - Verified
       </div>
     );
   }
@@ -31,14 +31,14 @@ function StatusStrip({ slot }) {
   if (status === "rejected") {
     return (
       <div className="mt-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
-        ❌ {slot.filename || "Document"} — Incorrect document
+        [Rejected] {slot.filename || "Document"} - Incorrect document
       </div>
     );
   }
 
   return (
     <div className="mt-3 rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-600">
-      📄 No file selected
+      No file selected
     </div>
   );
 }
@@ -79,7 +79,7 @@ function UploadSlot({
           onChange={(event) => onSelectFile(event.target.files?.[0] || null)}
         />
         <span className="font-medium text-slate-700">
-          {isChecking ? "Analyzing document…" : "Upload PDF or drag and drop"}
+          {isChecking ? "Analyzing document..." : "Upload PDF or drag and drop"}
         </span>
         <p className="mt-1 text-xs text-slate-500">{helperText}</p>
       </label>
@@ -187,7 +187,7 @@ export default function DocumentUploadSection({
 
   return (
     <section className="panel">
-      <h2 className="font-display text-2xl font-bold text-brand-ink">Section 3 — Documents</h2>
+      <h2 className="font-display text-2xl font-bold text-brand-ink">Section 3 - Documents</h2>
       <p className="mt-1 text-sm text-slate-600">
         Upload and verify both required documents before submitting.
       </p>

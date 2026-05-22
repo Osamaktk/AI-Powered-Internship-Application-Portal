@@ -46,7 +46,7 @@ export default function TrackSelectionSection({ selectedTracks, onToggleTrack })
     <section className="panel">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="font-display text-2xl font-bold text-brand-ink">Section 2 — Track Selection</h2>
+          <h2 className="font-display text-2xl font-bold text-brand-ink">Section 2 - Track Selection</h2>
           <p className="mt-1 text-sm text-slate-600">
             Select at least one and up to three tracks across all sections.
           </p>
@@ -95,3 +95,4 @@ export default function TrackSelectionSection({ selectedTracks, onToggleTrack })
     </section>
   );
 }
+

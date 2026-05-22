@@ -1,10 +1,10 @@
-# InternIQ
+# SPS - Software Productivity Strategists Internship Portal
 
-InternIQ is an AI-powered internship application portal built with FastAPI + React.
+SPS - Software Productivity Strategists internship portal is built with FastAPI + React.
 
 ## What Changed (Round 2)
 
-- Replaced Supabase persistence with local SQLite (`backend/database/interniq.db`)
+- Replaced Supabase persistence with local SQLite (`backend/database/sps_applications.db` by default)
 - Added live pre-verification API: `POST /api/verify-document`
 - Reworked document upload UX with AI checking states + rejection modal
 - Enforced server-side re-verification in `/apply` before saving
@@ -12,7 +12,7 @@ InternIQ is an AI-powered internship application portal built with FastAPI + Rea
 
 ## Storage
 
-- SQLite DB file (auto-created): `backend/database/interniq.db`
+- SQLite DB file (auto-created default): `backend/database/sps_applications.db`
 - Uploaded files:
   - `backend/uploads/cv/`
   - `backend/uploads/transcripts/`

@@ -3,6 +3,7 @@ import PersonalInfoSection from "./components/PersonalInfoSection";
 import TrackSelectionSection from "./components/TrackSelectionSection";
 import DocumentUploadSection from "./components/DocumentUploadSection";
 import SubmitSection from "./components/SubmitSection";
+import SpsProgramInfoSection from "./components/SpsProgramInfoSection";
 import useFormSubmit from "./hooks/useFormSubmit";
 
 const MAX_PHOTO_SIZE = 2 * 1024 * 1024;
@@ -167,13 +168,29 @@ export default function App() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
       <header className="mb-6 rounded-2xl bg-brand-ink p-6 text-white shadow-panel sm:mb-8 sm:p-8">
-        <p className="text-sm uppercase tracking-[0.2em] text-brand-mint">SPS Internship Portal</p>
-        <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">InternIQ Application Form</h1>
-        <p className="mt-2 max-w-2xl text-sm text-slate-100 sm:text-base">
-          Submit your profile, choose your preferred tracks, and upload your documents for AI-based
-          screening.
+        <p className="text-sm uppercase tracking-[0.2em] text-brand-mint">
+          SPS SpinnLabs Internship to Job Program
         </p>
+        <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">
+          SPS - Software Productivity Strategists Internship Application Portal
+        </h1>
+        <p className="mt-2 max-w-3xl text-sm text-slate-100 sm:text-base">
+          Start your professional journey by joining the SPS Internship Program. Submit your
+          profile, choose your preferred tracks, and upload your documents for AI-based screening.
+        </p>
+        <a
+          href="https://www.spsnet.com/spinnlabs_practice/internship-to-job-program/howitworks.php"
+          target="_blank"
+          rel="noreferrer"
+          className="mt-4 inline-block rounded-lg border border-brand-mint px-3 py-2 text-sm font-semibold text-brand-mint transition hover:bg-brand-mint/10"
+        >
+          View Official SPS Program Details
+        </a>
       </header>
+
+      <div className="mb-6 sm:mb-8">
+        <SpsProgramInfoSection />
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="animate-fade-slide">

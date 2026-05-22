@@ -5,7 +5,7 @@ export default function SubmitSection({ loading, result, error, canSubmit }) {
 
   return (
     <section className="panel">
-      <h2 className="font-display text-2xl font-bold text-brand-ink">Section 4 — Submit</h2>
+      <h2 className="font-display text-2xl font-bold text-brand-ink">Section 4 - Submit</h2>
       <p className="mt-1 text-sm text-slate-600">
         Review everything, then submit your application.
       </p>
@@ -49,3 +49,4 @@ export default function SubmitSection({ loading, result, error, canSubmit }) {
     </section>
   );
 }
+

@@ -20,7 +20,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="InternIQ API",
+    title="SPS - Software Productivity Strategists API",
     description="AI-powered internship application backend",
     version="2.0.0",
     lifespan=lifespan,

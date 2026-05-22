@@ -10,7 +10,7 @@ from datetime import datetime
 
 GMAIL_USER = os.getenv("GMAIL_USER")
 GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
-BRAND_NAME = "InternIQ"
+BRAND_NAME = "SPS - Software Productivity Strategists"
 BRAND_COLOR = "#1a56db"
 SUPPORT_EMAIL = os.getenv("GMAIL_USER")
 PORTAL_URL = os.getenv("PORTAL_URL", "http://localhost:5173")
@@ -156,7 +156,7 @@ def send_track_notification(
         first_name = str(applicant.get("first_name", "")).strip()
         last_name = str(applicant.get("last_name", "")).strip()
         subject = (
-            f"[InternIQ] New Application — {track_name} | {first_name} {last_name}".strip()
+            f"[SPS - Software Productivity Strategists] New Application — {track_name} | {first_name} {last_name}".strip()
         )
 
         tracks_display = _format_tracks(applicant.get("selected_tracks"))
@@ -293,7 +293,7 @@ def send_confirmation_to_applicant(applicant: dict) -> None:
     try:
         first_name = str(applicant.get("first_name", "")).strip()
         last_name = str(applicant.get("last_name", "")).strip()
-        subject = f"Your InternIQ Application Has Been Received — {first_name} {last_name}".strip()
+        subject = f"Your SPS - Software Productivity Strategists Application Has Been Received — {first_name} {last_name}".strip()
         submitted_display = _format_datetime(str(applicant.get("submitted_at", "")))
         tracks_display = _format_tracks(applicant.get("selected_tracks"))
         application_id = str(applicant.get("id", "")).strip()
@@ -448,8 +448,9 @@ def send_rejection_email(
 """
         _send_email(
             to=to_email,
-            subject="InternIQ Application — Document Upload Issue",
+            subject="SPS - Software Productivity Strategists Application — Document Upload Issue",
             html_body=html_body,
         )
     except Exception as exc:
         print(f"[EMAIL ERROR] Rejection email failed for {to_email}: {exc}")
+

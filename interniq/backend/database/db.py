@@ -1,5 +1,5 @@
 """
-Database module for InternIQ.
+Database module for SPS - Software Productivity Strategists.
 Uses Python's built-in sqlite3.
 The .db file is created automatically on first run.
 All tables are created with IF NOT EXISTS so restarts are safe.
@@ -12,7 +12,18 @@ import sqlite3
 from contextlib import contextmanager
 from uuid import uuid4
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "interniq.db")
+_DATABASE_DIR = os.path.dirname(__file__)
+_PREFERRED_DB_PATH = os.path.join(_DATABASE_DIR, "sps_applications.db")
+_EXISTING_DB_FILES = sorted(
+    file_name
+    for file_name in os.listdir(_DATABASE_DIR)
+    if file_name.lower().endswith(".db")
+)
+DB_PATH = (
+    _PREFERRED_DB_PATH
+    if os.path.exists(_PREFERRED_DB_PATH) or not _EXISTING_DB_FILES
+    else os.path.join(_DATABASE_DIR, _EXISTING_DB_FILES[0])
+)
 
 
 @contextmanager
