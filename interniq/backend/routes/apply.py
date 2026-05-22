@@ -11,7 +11,7 @@ from config.track_managers import TRACK_MANAGERS
 from database.db import insert_application
 from services.ai_verifier import verify_document_async
 from services.email_service import (
-    send_received_email,
+    send_confirmation_to_applicant,
     send_rejection_email,
     send_track_notification,
 )
@@ -90,6 +90,11 @@ def _normalize_ai_result(result: dict) -> dict:
         "verdict": verdict,
         "confidence": confidence,
         "reason": _clean(result.get("reason")),
+        "evidence": [
+            _clean(item)
+            for item in (result.get("evidence") or [])
+            if _clean(item)
+        ],
         "is_passed": verdict == "Valid" and confidence in {"High", "Medium"},
     }
 
@@ -159,19 +164,28 @@ async def submit_application(
 
     if not cv_verification["is_passed"] or not transcript_verification["is_passed"]:
         reason_parts = []
+        failed_document = "CV"
+        failed_reason = cv_verification["reason"]
+        failed_evidence = cv_verification.get("evidence", [])
+
         if not cv_verification["is_passed"]:
             reason_parts.append(f"CV check failed: {cv_verification['reason']}")
         if not transcript_verification["is_passed"]:
             reason_parts.append(
                 f"Transcript check failed: {transcript_verification['reason']}"
             )
+            failed_document = "Transcript"
+            failed_reason = transcript_verification["reason"]
+            failed_evidence = transcript_verification.get("evidence", [])
         reason = " ".join(part for part in reason_parts if part).strip() or (
             "Document verification failed."
         )
         send_rejection_email(
             to_email=_clean(email),
-            applicant_name=f"{_clean(first_name)} {_clean(last_name)}".strip(),
-            reason=reason,
+            applicant_name=_clean(first_name),
+            failed_document=failed_document,
+            reason=failed_reason or reason,
+            evidence=failed_evidence,
         )
         return {"status": "rejected", "reason": reason}
 
@@ -239,6 +253,7 @@ async def submit_application(
     }
 
     insert_application(application_row)
+    saved_cv_absolute_path = str((BACKEND_ROOT / cv_saved_path).resolve())
 
     for track_name in tracks:
         manager_email = TRACK_MANAGERS.get(track_name)
@@ -247,12 +262,9 @@ async def submit_application(
                 manager_email=manager_email,
                 track_name=track_name,
                 applicant=application_row,
-                review_status=application_row["status"],
+                cv_filepath=saved_cv_absolute_path,
             )
-    send_received_email(
-        to_email=application_row["email"],
-        applicant_name=f"{application_row['first_name']} {application_row['last_name']}".strip(),
-    )
+    send_confirmation_to_applicant(applicant=application_row)
 
     return {
         "status": "accepted",

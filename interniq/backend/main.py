@@ -6,11 +6,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
+load_dotenv()
+
 from database.db import init_db
 from routes import admin, apply
 from routes.verify import router as verify_router
-
-load_dotenv()
 
 
 @asynccontextmanager
