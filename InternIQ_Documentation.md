@@ -1,4 +1,4 @@
-# InternIQ
+
 ## AI-Powered Internship Application Portal
 ### Project Documentation — v1.0
 
