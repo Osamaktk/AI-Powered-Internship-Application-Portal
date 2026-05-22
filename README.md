@@ -187,23 +187,6 @@ VITE_API_BASE_URL=http://localhost:8000
    - `GET /applications`
    - `GET /applications/{application_id}`
 
-## Screenshots / Demo
-
-Add screenshots or demo GIFs in your repository, for example:
-
-```text
-docs/images/home.png
-docs/images/verification-modal.png
-docs/images/success-state.png
-docs/images/admin-response.png
-```
-
-Then reference them in this section:
-
-```md
-![Home Screen](docs/images/home.png)
-![Verification Modal](docs/images/verification-modal.png)
-```
 
 ## Contributing
 
