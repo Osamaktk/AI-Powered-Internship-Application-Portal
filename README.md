@@ -8,7 +8,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-UI-06B6D4?logo=tailwindcss&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?logo=sqlite&logoColor=white)
 
-## Hero Description
+## Overview
 
 This project is a full-stack internship application portal built for **SPS - Software Productivity Strategists**. It helps students submit applications through a structured form while automatically validating CV and transcript uploads using AI before final submission. It is designed for internship teams that want a cleaner intake process, faster screening, and department-specific notification workflows.
 
@@ -210,3 +210,7 @@ See [LICENSE](./LICENSE) for details.
 Built by **Osamaktk**  
 GitHub: [https://github.com/Osamaktk](https://github.com/Osamaktk)
 
+
+## Development and maintenance
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution workflow and [SECURITY.md](SECURITY.md) for handling credentials and sensitive data.
